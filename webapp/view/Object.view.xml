@@ -1,0 +1,55 @@
+<mvc:View
+	controllerName="sap.training.controller.Object"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:footerbar="sap.ushell.ui.footerbar">
+
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false"
+		busy="{objectView>/busy}"
+		busyIndicatorDelay="{objectView>/delay}"
+		showFooter="true">
+		
+		<semantic:footerCustomActions>
+				<Button text="CustomFooterBtn" press="onSave" type="Emphasized"/>
+		</semantic:footerCustomActions>
+
+		<semantic:titleHeading>
+			<Title text="{Name}" />
+		</semantic:titleHeading>
+
+		<semantic:headerContent>
+			<ObjectNumber
+				number="{
+					path: 'Price',
+					formatter: '.formatter.numberUnit'
+				}"
+			/>
+		</semantic:headerContent>
+		
+		<semantic:content>
+			<f:SimpleForm editable="true">
+				<Label text="Product name"></Label>
+				<Input value="{Name}"></Input>
+			</f:SimpleForm>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id ="shareTile" title="{objectView>/saveAsTileTitle}" />
+		</semantic:saveAsTileAction>
+
+	</semantic:SemanticPage>
+
+</mvc:View>
